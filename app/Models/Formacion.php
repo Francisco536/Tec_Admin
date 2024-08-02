@@ -17,6 +17,7 @@ class Formacion extends Model
         'fech_fin',
         'horario',
         'name_instructor',
+        'institucion_instructor'
 
     ];
 }
