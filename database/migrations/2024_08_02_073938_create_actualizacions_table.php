@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('actualizacions', function (Blueprint $table) {
             $table->id();
+            $table->string('name_curso');
+            $table->string('categoria');
+            $table->string('tema');
+            $table->string('fech_inicio');
+            $table->string('fech_fin');
+            $table->string('horario');
+            $table->string('name_instructor');
+            $table->string('institucion_instructor');
             $table->timestamps();
         });
     }
