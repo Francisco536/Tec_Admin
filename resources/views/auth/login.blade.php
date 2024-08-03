@@ -59,7 +59,7 @@
                 <br>
                 <br>
                 <div class="row px-3 justify-content-center mt-4 mb-5 border-line">
-                    <img src="assets/img/tec.jpg" class="image">
+                    <img src="assets/img/tec2.png" class="image">
                 </div>
             </div>
         </div>
@@ -164,7 +164,7 @@
         <div class="row px-3 text-center">
             <small class="ml-4 ml-sm-5 mb-2 ">
                 <img height="40px" width="40px" src="assets/img/tecnm.png">
-                Tecnológico de Tecomatlán Copyright &copy; 2023. All rights reserved.</small>
+                Seguimiento a cursos TECNM Copyright &copy; 2024. All rights reserved.</small>
             <div class="social-contact ml-4 ml-sm-auto">
             </div>
         </div>
@@ -172,14 +172,4 @@
 </div>
 </div>
 
-{{--
-@section('js')
-<script>
-var adminLog = document.getElementById('admin');
-adminLog.addEventListener("submit", (e) => {
-});
-var alumLog = document.getElementById('docente');
-alumLog.addEventListener("submit", (e) => {
-});
-</script>
-@stop --}}
+
