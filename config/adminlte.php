@@ -327,8 +327,8 @@ return [
         ['header' => 'Usuarios'],
         [
             'text' => 'Administrador',
-            'url' => 'admin/settings',
             'icon' => 'fas fa-user-cog',
+            'route' => 'lista.admin',
         ],
         [
             'text' => 'Docente/Instructor',
