@@ -34,6 +34,7 @@ class User extends Authenticatable
     	'perfil_academic',
     	'fech_ingreso',
     	'institucion',
+        'telefono',
         'email',
         'password',
     ];

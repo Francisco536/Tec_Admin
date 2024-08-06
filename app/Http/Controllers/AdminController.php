@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class AdminController extends Controller
 {
@@ -27,7 +29,29 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            $emailDup = User::where('email', $request->email)->exists();
+
+            if($emailDup === false){
+                User::created([
+                    'name'       => $request['name'],
+                    'ap_paterno' => $request['ap_paterno'],
+                    'ap_materno' => $request['ap_materno'],
+                    'telefono'   => $request['telefono'],
+                    'email'      => $request['email'],
+                    'password'   => $request['password'],
+
+
+
+
+                ]);
+            }
+
+        }
+        catch(ValidationException $e)
+        {
+
+        }
     }
 
     /**
