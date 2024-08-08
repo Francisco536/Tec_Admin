@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class AdminController extends Controller
@@ -13,7 +14,12 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        $collection = User::whereHas('roles', function ($query){
+            $query->where('name', 'Admin');
+        })->paginate(10);
+
+        $params['collection'] = $collection;
+        return view('admin.index', $params);
     }
 
     /**
@@ -33,25 +39,31 @@ class AdminController extends Controller
             $emailDup = User::where('email', $request->email)->exists();
 
             if($emailDup === false){
-                User::created([
+                User::create([
                     'name'       => $request['name'],
                     'ap_paterno' => $request['ap_paterno'],
                     'ap_materno' => $request['ap_materno'],
                     'telefono'   => $request['telefono'],
                     'email'      => $request['email'],
-                    'password'   => $request['password'],
+                    'password'   => Hash::make($request['password']),
+                ])->assignRole('Admin');
 
-
-
-
-                ]);
+                $response = [
+                    "code" => 200, "message" => "Exito"
+                ];
+                return redirect()->route('lista.admin')->with('success', 'Usuario agregado Correctamente!');
+            }else{
+                return redirect()->route('lista.admin')->with('message', 'El Correo ya existe, Ingresa uno nuevo');
             }
-
         }
         catch(ValidationException $e)
         {
+            $response = [
+                "code" => 422, "message", "error" => $e->errors()
+            ];
 
         }
+        return response()->json($response);
     }
 
     /**

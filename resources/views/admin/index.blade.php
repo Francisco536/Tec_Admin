@@ -39,12 +39,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @if(isset($collection))
+                        @if(isset($collection))
                             @foreach ($collection as $value)
                                 <tr>
                                     <td>{{ $value->name }}</td>
-                                    <td>{{ $value->ap_pater }}</td>
-                                    <td>{{ $value->ap_mater }}</td>
+                                    <td>{{ $value->ap_paterno }}</td>
+                                    <td>{{ $value->ap_materno }}</td>
                                     <td>{{ $value->email }}</td>
                                     <td>
                                         <div class="btn-group">
@@ -60,7 +60,7 @@
                             <tr>
                                 <td colspan="4" class="text-center">No se encontrarón registros</td>
                             </tr>
-                        @endif --}}
+                        @endif
                     </tbody>
                 </table>
 

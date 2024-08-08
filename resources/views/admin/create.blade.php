@@ -18,7 +18,7 @@
                 <div class="card-header">{{ __('Registrar') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" id="admin" action="{{ route('store.admin') }}" onsubmit="verificarPasswords();">
+                    <form method="POST" id="admin"  name="admin" action="{{ route('store.admin') }}" onsubmit="verificarPasswords();">
                         @csrf
 
                         <div class="row mb-3">
@@ -36,12 +36,12 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="ap_pater" class="col-md-4 col-form-label text-md-end">{{ __('Apellido Paterno') }}</label>
+                            <label for="ap_paterno" class="col-md-4 col-form-label text-md-end">{{ __('Apellido Paterno') }}</label>
 
                             <div class="col-md-6">
-                                <input id="ap_pater" type="text" class="form-control @error('ap_pater') is-invalid @enderror" name="ap_pater" value="{{ old('ap_pater') }}" required autocomplete="ap_pater" autofocus>
+                                <input id="ap_paterno" type="text" class="form-control @error('ap_paterno') is-invalid @enderror" name="ap_paterno" value="{{ old('ap_paterno') }}" required autocomplete="ap_paterno" autofocus>
 
-                                @error('ap_pater')
+                                @error('ap_paterno')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -50,16 +50,25 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="ap_mater" class="col-md-4 col-form-label text-md-end">{{ __('Apellido Materno') }}</label>
+                            <label for="ap_matermo" class="col-md-4 col-form-label text-md-end">{{ __('Apellido Materno') }}</label>
 
                             <div class="col-md-6">
-                                <input id="ap_mater" type="text" class="form-control @error('ap_mater') is-invalid @enderror" name="ap_mater" value="{{ old('ap_mater') }}" required autocomplete="ap_mater" autofocus>
+                                <input id="ap_materno" type="text" class="form-control @error('ap_materno') is-invalid @enderror" name="ap_materno" value="{{ old('ap_materno') }}" required autocomplete="ap_materno" autofocus>
 
-                                @error('ap_mater')
+                                @error('ap_materno')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="telefono" class="col-md-4 col-form-label text-md-end">{{ __('Teléfono') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="telefono" type="text" class="form-control"  name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono" >
+                                <div id="alert0" class="alert alert-danger" style="display:none" role="alert">Ingresa solo números</div>
                             </div>
                         </div>
 
@@ -128,6 +137,8 @@
     },3000);
 
 });
+
+
 //primeras letras mayusculas
 function capitalize(str){
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -136,11 +147,11 @@ function capitalize(str){
         input.addEventListener('keypress', e => {
         setTimeout(() => {input.value = input.value.split(' ').map(x => capitalize(x)).join(' ')}, 1)
         });
-        const input2 = document.getElementById('ap_pater');
+        const input2 = document.getElementById('ap_paterno');
         input2.addEventListener('keypress', e => {
         setTimeout(() => {input2.value = capitalize(input2.value)}, 1)
         });
-        const input3 = document.getElementById('ap_mater');
+        const input3 = document.getElementById('ap_materno');
         input3.addEventListener('keypress', e => {
         setTimeout(() => {input3.value = capitalize(input3.value)}, 1)
         });
@@ -174,6 +185,24 @@ function capitalize(str){
         }
 
     });
+
+    //numero de telefono
+telefono = document.getElementById("telefono");
+telefono.addEventListener('keypress', function (e){
+	    if (!soloNumeros(event)){
+  	            e.preventDefault();
+                  let x = document.getElementById("alert0");
+                    x.style.display = "block";
+                    setTimeout(function () {
+                    $("#alert0").fadeOut(1000);
+                    }, 1000);
+         }
+    });
+    function soloNumeros(e){
+        var key = e.charCode;
+        console.log(key);
+        return key >= 48 && key <= 57;
+    }
 
     </script>
     <script src="js/bootstrap-datetimepicker.min.js"></script>
