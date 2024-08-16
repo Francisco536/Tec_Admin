@@ -50,7 +50,10 @@
                                         <div class="btn-group">
                                             <a  href="{{route('ver.admin', $value->id)}}"  class="btn-sm btn-rounded btn-primary mb-3" data-toggle="tooltip" data-placement="top" title="Ver"><i class="fas fa-eye"></i></a>
                                             <a  href="{{route('edit.admin', $value->id)}}"  class="btn-sm btn-rounded btn-warning mb-3" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i></a>
-                                            <a href="{{ route('destroy.admin', $value->id) }}" class="btn-sm btn-rounded btn-danger mb-3" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></a>
+                                            <form action="{{route('destroy.admin', $value->id)}}"  method="GETsss" class="form-eliminar">
+                                            <button type="submit"  class="btn-sm btn-rounded btn-danger mb-3" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa fa-trash"></i></button>
+                                            </form>
+
 
                                         </div>
                                     </td>
@@ -66,7 +69,7 @@
 
             </div>
             <div class="d-flex justify-content-end">
-                {{-- {!! $collection->links() !!} --}}
+                {!! $collection->links() !!}
             </div>
         </div>
     </div>
@@ -77,6 +80,8 @@
 @stop
 
 @section('js')
+@routes
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script> console.log('Hi!');
     $(document).ready(function() {
     setTimeout(function() {
@@ -84,5 +89,31 @@
     },3000);
 
 });
+
+
+$('.form-eliminar').submit(function(event) {
+    event.preventDefault();
+    Swal.fire({
+  title: "Deseas eliminar este usuario?",
+  text: "Esta accion es irreversible!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Eliminar",
+  cancelButtonText: "Cancelar"
+}).then((result) => {
+  if (result.isConfirmed) {
+ this.submit();
+
+
+  }
+});
+
+
+});
+
+
     </script>
+
 @stop

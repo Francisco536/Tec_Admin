@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
+use Psy\Readline\Hoa\Console;
 
 class AdminController extends Controller
 {
@@ -69,32 +71,50 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(AdminController $admin)
+    public function show($id)
     {
-        //
+        $admin = User::findOrFail($id);
+        return view('admin.show', compact('admin'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(AdminController $admin)
+    public function edit($id)
     {
-        //
+        $admin = User::findOrFail($id);
+        return view('admin.update', compact('admin'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, AdminController $admin)
+    public function update(Request $request, $id)
     {
-        //
+        $admin = request()->except(['_token','_method']);
+
+        User::where('id', $id)->update([
+            'name' => $request['name'],
+            'ap_paterno' => $request['ap_paterno'],
+            'ap_materno' => $request['ap_materno'],
+            'telefono' => $request['telefono'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+        ]);
+
+        $response = [
+            "code" => 200, "msg" => "Éxito"
+        ];
+        return redirect()->route('lista.admin')->with('success','Usuario Actualizado correctamente');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(AdminController $admin)
+    public function destroy($id)
     {
-        //
+
+        User::destroy($id);
+        return redirect()->route('lista.admin')->with('message','Usuario eliminado correctamente');
     }
 }
