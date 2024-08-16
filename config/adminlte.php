@@ -324,6 +324,11 @@ return [
         //     'label' => 4,
         //     'label_color' => 'success',
         // ],
+        [
+            'text' => 'Dashboard',
+            'icon' => 'fas fa-chart-bar',
+            'route' => 'dashboard',
+        ],
         ['header' => 'Usuarios'],
         [
             'text' => 'Administrador',
@@ -337,7 +342,7 @@ return [
         ],
         ['header' => 'Gestión de Cursos'],
         [
-            'text' => 'Actualización Profecional',
+            'text' => 'Actualización Profesional',
             'icon' => 'fas fa-award',
             'url' => '#',
         ],
@@ -390,8 +395,8 @@ return [
             'url' => '#',
 
         ],
-        ['header' => ' '],
-        ['header' => ' '],
+
+
         [
             'text' => 'Cerrar Sesión',
             'icon' => 'fas fa-power-off',
