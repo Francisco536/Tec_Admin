@@ -8,17 +8,24 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
 
 class SendPassword extends Mailable
 {
     use Queueable, SerializesModels;
+    public $title;
+    public $content;
+    public $subject;
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($title, $content, $subject)
     {
-        //
+        $this->title   = $title;
+        $this->content = $content;
+        $this->subject = $subject;
+
     }
 
     /**
@@ -27,7 +34,8 @@ class SendPassword extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Send Password',
+            from: new address('prueba@gmail.com'),
+            subject: 'Envio de Contraseña',
         );
     }
 
@@ -37,7 +45,7 @@ class SendPassword extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'email.SendPassword',
         );
     }
 
