@@ -337,7 +337,7 @@ return [
         ],
         [
             'text' => 'Docente/Instructor',
-            'url' => 'admin/settings',
+            'route' => 'lista.docente',
             'icon' => 'fas fa-chalkboard-teacher',
         ],
         ['header' => 'Gestión de Cursos'],

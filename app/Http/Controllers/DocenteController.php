@@ -12,7 +12,7 @@ class DocenteController extends Controller
      */
     public function index()
     {
-        //
+        return view('docente.index');
     }
 
     /**
@@ -20,7 +20,7 @@ class DocenteController extends Controller
      */
     public function create()
     {
-        //
+        return view('docente.create');
     }
 
     /**
